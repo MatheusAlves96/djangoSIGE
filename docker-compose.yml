@@ -8,8 +8,9 @@ services:
       POSTGRES_PASSWORD: pass
     volumes:
       - ./database:/var/lib/postgresql/data
+
   gunicorn:
-    image: djangosige
+    build: .
     command: gunicorn -b 0.0.0.0:8000 djangosige.wsgi:application
     environment:
       - SECRET_KEY=0#pny4oox9s#+#5dkde25dj79b-o^sdbz4kiumg#e1qx3ky
@@ -20,6 +21,7 @@ services:
     links:
       - postgres
     working_dir: /opt/djangoSIGE/
+
   nginx:
     image: nginx:alpine
     volumes:
